@@ -1,0 +1,976 @@
+/* ======================= General Styles & Variables ======================= */
+:root {
+    --primary-color: #6a994e;
+    --dark-color: #343a40;
+    --light-color: #f8f6f2;
+    --black-color: #1c1c1c;
+    --font-heading: var(--font-heading);
+    --font-body: var(--font-body);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ======================= Container Layout ======================= */
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        width: 95%;
+        max-width: 1100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 0 12px;
+    }
+}
+
+/* ======================= Typography ======================= */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #588142;
+}
+
+.text-center {
+    text-align: center;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+/* ======================= Header & Navigation ======================= */
+.header {
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+/* Navigation link for header (dark text) */
+.nav-link {
+    color: var(--black-color);
+    text-decoration: none;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+
+.nav-link-light {
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.nav-link-light:hover,
+.nav-link-light.active {
+    color: var(--primary-color);
+}
+
+.nav-link.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.nav-item {
+    list-style: none;
+    font-weight: 500;
+}
+
+
+/* ======================= Responsive Navigation ======================= */
+
+.hamburger {
+    display: none;
+    /* Hidden by default on desktop */
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--dark-color);
+}
+
+/* Media query for mobile devices */
+@media(max-width: 768px) {
+    .hamburger {
+        display: block;
+        /* Show the hamburger button on mobile */
+        z-index: 101;
+        /* Ensure it's on top */
+    }
+
+    /* Animate hamburger into an 'X' when active */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        /* Start off-screen */
+        top: 80px;
+        /* Position below the header */
+        flex-direction: column;
+        background-color: #ffffff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        z-index: 100;
+    }
+
+    .nav-menu.active {
+        left: 0;
+        /* Slide into view */
+    }
+
+}
+
+/* ======================= Hero Section ======================= */
+
+.hero-section {
+    /* Assumes your image is in public/global/hero-image.png */
+    background-image: url('/global/hero-image.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Ensures the image covers the section */
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    /* Needed for the overlay */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    /* Ensures content is above the overlay */
+    z-index: 2;
+    max-width: 700px;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+    /* Ensure heading color is white */
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Specific styles for the hero button */
+.hero-section .btn {
+    background-color: #fbbf24;
+    /* A vibrant yellow */
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.hero-section .btn:hover {
+    transform: scale(1.05);
+}
+
+.hero-content p {
+    color: #f8f8f8;
+    font-size: 1.1rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #588142;
+}
+
+/* ======================= Products Section ======================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.product-image-container {
+    margin-bottom: 1rem;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 250px;
+    object-fit: contain;
+}
+
+.product-details {
+    flex-grow: 1;
+    color: #555;
+    font-size: 0.9rem;
+    align-items: center;
+}
+
+/* Product Button Styling */
+.product-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    margin: 1rem auto 0;
+}
+
+
+/* Hover Effect */
+.product-btn:hover {
+    background: var(--dark-color);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* ======================= Features Section ======================= */
+/* Section Heading */
+.section-title {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.features-section .container {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.feature-box {
+    background: var(--dark-color);
+    color: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    flex: 1 1 300px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+/* Hover effect */
+.feature-box:hover {
+    transform: translateY(-10px);
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.feature-box .icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature-box h3 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.feature-box:hover .icon {
+    color: #fff;
+    /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); */
+}
+
+/* Optional: text color consistency */
+.feature-box:hover h3,
+.feature-box:hover p {
+    color: #fff;
+}
+
+/* ======================= Video & Map Section ======================= */
+.video-placeholder,
+.map-placeholder {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+}
+
+.video-placeholder iframe,
+.map-placeholder iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ======================= Testimonials Section ======================= */
+.testimonials-section {
+    text-align: center;
+}
+
+.overall {
+    margin: 0.5rem 0 1rem;
+}
+
+.carousel {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Arrows */
+.nav-btn {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.nav-btn:hover {
+    opacity: 0.9;
+}
+
+/* Horizontal scroll track */
+.track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    gap: 16px;
+    padding: 4px 2px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Increased height box & 3 per view */
+.testimonial-card {
+    scroll-snap-align: start;
+    flex: 0 0 calc((100% - 2 * 16px) / 3);
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem 1.25rem;
+    /* a bit more padding */
+    min-height: 220px;
+    /* increased height */
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.testimonial-card h4 {
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.stars {
+    font-size: 1.1rem;
+}
+
+.date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive: adjust per screen size */
+@media (max-width: 1024px) {
+    .testimonial-card {
+        flex-basis: calc((100% - 16px) / 2);
+    }
+}
+
+@media (max-width: 600px) {
+    .testimonial-card {
+        flex-basis: 100%;
+    }
+}
+
+/* Optional scrollbar styling */
+.track::-webkit-scrollbar {
+    height: 8px;
+}
+
+.track::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 8px;
+}
+
+
+/* ======================= Footer ======================= */
+.footer {
+    background: var(--black-color);
+    color: #fff;
+    padding-top: 4rem;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    padding-bottom: 4rem;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #444;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+/* ======================= Responsive Design ======================= */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero-section {
+        height: 70vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .features-section .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .feature-box {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        /* Change from 3 columns to 1 column */
+        text-align: center;
+        /* Center all text content */
+        gap: 2rem;
+        /* Add space between the stacked sections */
+    }
+
+
+    .footer-bottom {
+        flex-direction: column;
+        /* Stack copyright and social icons vertically */
+        gap: 1rem;
+        /* Add space between them */
+    }
+}
+
+
+
+/* ======================= Contact Page Styles ======================= */
+.contact-section {
+    padding: 4rem 2rem;
+}
+
+.contact-section .container {
+    max-width: 800px;
+    /* Limit the width of the content area */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-section h2 {
+    margin-bottom: 1rem;
+}
+
+.contact-section p {
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.contact-form {
+    text-align: left;
+    /* Align labels and inputs to the left */
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Creates the two-column layout */
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+    /* Makes the reason field span both columns */
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+}
+
+.contact-form .btn {
+    width: fit-content;
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.contact-form .btn:hover {
+    background-color: #588142;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Responsive styles for the form */
+@media(max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        /* On mobile, stack the fields in a single column */
+    }
+}
+
+
+
+/* ======================= Our Process Page (Redesigned) ======================= */
+
+/* Add this to the top of your CSS file, or to your body selector */
+body {
+    counter-reset: step-counter;
+    /* Initializes our step number counter */
+}
+
+.process-section {
+    padding: 4rem 1rem;
+    background-color: var(--light-color);
+    /* Matches homepage background */
+}
+
+.process-section h2 {
+    text-align: center;
+    font-size: 2.rem;
+    margin-bottom: 1rem;
+}
+
+.process-section .subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.process-steps {
+    display: grid;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    /* Reduced gap between image and text */
+    counter-increment: step-counter;
+    /* Increases the counter for each step */
+    /* Remove the old card styles */
+
+}
+
+/* The zig-zag logic remains the same */
+.step:nth-child(even) .step-text {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.step:nth-child(even) .step-image {
+    grid-column: 2;
+}
+
+.step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    /* This creates the circle shape */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.step-text {
+    position: relative;
+    /* Needed for the background number */
+    padding: 1rem;
+    text-align: left;
+}
+
+/* The large, decorative step number */
+.step-text::before {
+    content: "0" counter(step-counter);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #fbbf24;
+    /* Golden-yellow from your logo */
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.step-text h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    /* Green from your logo */
+    font-size: 2rem;
+}
+
+/* Responsive styles for mobile */
+@media(max-width: 768px) {
+    .step {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .step-text {
+        text-align: center;
+    }
+
+    .step-text::before {
+        font-size: 5rem;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Ensure image is always on top on mobile */
+    .step .step-image,
+    .step:nth-child(even) .step-image {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .step .step-text,
+    .step:nth-child(even) .step-text {
+        grid-column: 1;
+        grid-row: 2;
+    }
+}
+
+
+/* =================== Founders Section (About Page) =================== */
+
+.about-section {
+    padding: 4rem 2rem;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.about-header h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.about-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #555;
+    line-height: 1.6;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-text h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.about-text p {
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.founders-section {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.founders-section h2 {
+    margin-bottom: 3rem;
+}
+
+.founders-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.founder-card img {
+    border-radius: 50%;
+    /* Makes the image a circle */
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 3px solid var(--primary-color);
+}
+
+.founder-card h3 {
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.founder-card h4 {
+    color: #777;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.founder-card p {
+    line-height: 1.6;
+}
+
+/* Responsive styles for the founders section */
+@media(max-width: 768px) {
+    .founders-grid {
+        grid-template-columns: 1fr;
+        /* Stack the cards on mobile */
+    }
+}

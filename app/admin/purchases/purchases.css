@@ -1,0 +1,574 @@
+/* ====== Khodiyar Oil Mill - Admin Products Page ====== */
+
+.products-page {
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8faf9;
+    color: #333;
+}
+
+/* ---------- Header ---------- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 3px solid #1b5e20;
+    padding-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1b5e20;
+}
+
+/* Search box container */
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 240px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 6px 10px;
+    transition: all 0.2s ease;
+}
+
+/* Icon style */
+.search-box .search-icon {
+    position: absolute;
+    left: 10px;
+    color: #666;
+    pointer-events: none;
+}
+
+/* Input style */
+.search-box input {
+    width: 100%;
+    padding: 6px 10px 6px 30px;
+    /* space for the icon */
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    color: #333;
+    font-family: inherit;
+}
+
+/* On focus */
+.search-box:focus-within {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+}
+
+/* Placeholder style */
+.search-box input::placeholder {
+    color: #aaa;
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
+    .search-box {
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+
+
+/* ---------- Add Product Button ---------- */
+.add-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #1b5e20;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(27, 94, 32, 0.2);
+}
+
+.add-button:hover {
+    background-color: #2e7d32;
+    transform: translateY(-2px);
+}
+
+/* ---------- Table Container ---------- */
+.table-container {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+thead th {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #c8e6c9;
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
+}
+
+tbody tr:hover {
+    background-color: #f9fff9;
+}
+
+/* ---------- Product Name Column ---------- */
+.product-name {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* ---------- Action Buttons ---------- */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-buttons button {
+    background: #f8faf9;
+    border: 1px solid #cfd8dc;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1b5e20;
+    transition: all 0.2s ease;
+}
+
+.action-buttons button:hover {
+    background-color: #f1f8e9;
+}
+
+.action-buttons .delete {
+    border-color: #ffcdd2;
+    color: #c62828;
+}
+
+.action-buttons .delete:hover {
+    background-color: #ffebee;
+}
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ensure it covers the full height */
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+    padding: 2rem 0;
+    /* <-- ADD THIS LINE */
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 12px;
+    width:85%;
+    max-width: 95%;
+    border-top: 5px solid #1b5e20;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+    /* --- 👇 NEW FLEXBOX AND HEIGHT RULES 👇 --- */
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    /* Set a max height (e.g., 90% of viewport height) */
+
+    /* Animation */
+    transform: scale(0.9);
+    opacity: 0;
+    animation: popIn 0.3s ease forwards;
+}
+
+
+
+.modal-content h2 {
+    padding: 1.5rem 2rem 1rem;
+    /* Give it padding */
+    flex-shrink: 0;
+    /* Prevent it from shrinking */
+    margin: 0;
+    color: #1b5e20;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* The new scrollable container */
+.modal-body {
+    overflow-y: auto;
+    /* THIS IS THE KEY: Add scrollbar only when needed */
+    flex-grow: 1;
+    /* Allow this section to grow and fill available space */
+    padding: 1.5rem 2rem;
+    /* Add padding to the scrollable content */
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem 1.5rem;
+    /* Give it consistent padding */
+    flex-shrink: 0;
+    /* Prevent it from shrinking */
+    border-top: 1px solid #e0e0e0;
+    margin-top: 0;
+    /* Remove previous margin-top */
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cfd8dc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fff; /* Ensure consistent background */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit; /* Ensures selects use the same font */
+}
+
+/* Also, update the focus rule to be general */
+.modal-content input:focus,
+.modal-content select:focus {
+  outline: none;
+  border-color: #1b5e20;
+  box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.1); /* Nicer focus ring */
+}
+
+
+.form-group input:focus {
+    outline: none;
+    border-color: #1b5e20;
+}
+
+/* ---------- Modal Buttons ---------- */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.modal-actions button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.modal-actions .cancel {
+    background-color: #f1f3f5;
+    color: #495057;
+}
+
+.modal-actions .cancel:hover {
+    background-color: #e9ecef;
+}
+
+.modal-actions .save {
+    background-color: #1b5e20;
+    color: #fff;
+}
+
+.modal-actions .save:hover {
+    background-color: #2e7d32;
+}
+
+.modal-actions .delete-confirm {
+    background-color: #c62828;
+    color: #fff;
+}
+
+.modal-actions .delete-confirm:hover {
+    background-color: #b71c1c;
+}
+
+.warning {
+    color: #c62828;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
+}
+
+.error-message {
+    color: #c62828;
+    font-size: 14px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* ---------- Toast Notification ---------- */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease forwards;
+}
+
+.toast-success {
+    background-color: #28a745;
+}
+
+.toast-error {
+    background-color: #dc3545;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+
+/* Medium screens (tablets) */
+@media (max-width: 992px) {
+    .products-page {
+        padding: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    th,
+    td {
+        padding: 0.8rem;
+    }
+
+    .add-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.9rem;
+    }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 600px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .add-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th,
+    td {
+        padding: 0.7rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+        width: 90%;
+    }
+
+}
+
+/* ---------- Modal Footer & Totals ---------- */
+.modal-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    /* Helps on smaller screens */
+    gap: 1rem;
+}
+
+.totals-section {
+    width: 280px;
+    /* Give it a fixed width */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-row h4,
+.total-row h3 {
+    margin: 0;
+    color: #555;
+    font-weight: 500;
+}
+
+.total-row span {
+    font-weight: 600;
+    color: #333;
+}
+
+.grand-total-row {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 2px solid #1b5e20;
+}
+
+.grand-total-row h3,
+.grand-total-row span {
+    color: #1b5e20;
+    font-size: 1.2rem;
+}
+
+/* Specific styling for the discount input */
+.discount-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+}
+
+.discount-input-wrapper span {
+    padding-left: 10px;
+    color: #666;
+    font-weight: 500;
+}
+
+.discount-input {
+    width: 100px;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+}
+
+.discount-input:focus-within {
+    box-shadow: 0 0 0 2px #1b5e20;
+}
+.input-error {
+  border-color: #c62828 !important; /* Use !important to override other border styles */
+  background-color: #ffebee;
+}
+
+/* Style for the error message text below the input */
+.error-text {
+  color: #c62828;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block; /* Make it a block to sit on its own line */
+}
