@@ -21,22 +21,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${playfair.variable}`}>
-      <head>
-        {/* Font Awesome: defer loading to prevent render-blocking */}
-        <link
-          rel="preload"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          as="style"
-          onload="this.onload=null;this.rel='stylesheet'"
-        />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          />
-        </noscript>
-      </head>
       <body>
+        {/* Font Awesome: either use the kit (script) OR the CSS link.
+            Here I show loading the CSS via a <link> (inserted directly).
+            If you prefer the kit, replace with a <Script src="https://kit.fontawesome.com/YOUR-KIT.js" /> */}
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+
         {/* Google Analytics - load gtag.js after interactive */}
         <Script
           strategy="afterInteractive"
