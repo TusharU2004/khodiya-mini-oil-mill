@@ -1,9 +1,16 @@
-// app/components/home/Hero.js
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   return (
     <section className="hero-section">
+      <Image
+        src="/global/hero-image.png"
+        alt="Pure and Healthy Groundnut Oil"
+        fill={true}
+        priority={true}
+        className="hero-background-image"
+      />
       {/* This div is the dark overlay for better text readability */}
       <div className="hero-overlay"></div>
 
