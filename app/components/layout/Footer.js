@@ -34,10 +34,10 @@ const Footer = () => {
             <div className="footer-bottom">
                 <p>Copyright © 2025 | Khodiyar Oil Mill</p>
                 <div className="social-icons">
-                    <a href="https://wa.me/917043169204"><i className="fab fa-whatsapp"></i></a>
-                    <a href="#"><i className="fab fa-facebook-f"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                    <a href="#"><i className="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/917043169204" aria-label="WhatsApp"><i className="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
                 </div>
             </div>
         </footer>

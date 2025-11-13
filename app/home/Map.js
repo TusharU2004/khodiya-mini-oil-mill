@@ -15,6 +15,7 @@ const Map = () => {
                         allowFullScreen=""
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
+                        title="Google Map of Khodiya Mini Oil Mill Location"
                     ></iframe>
                 </div>
             </div>
