@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
-import reviewsData from './data/reviews.json';
+import { useRef, useMemo, useEffect, useState } from 'react';
 
+// Inline star component (no extra file needed)
 function StarRow({ rating }) {
   const full = Math.round(Number(rating) || 0);
   return <p className="stars">{'★★★★★☆☆☆☆☆'.slice(5 - full, 10 - full)}</p>;
@@ -15,23 +15,61 @@ function formatDate(d) {
 }
 
 export default function Testimonials() {
-  const reviews = useMemo(
-    () => [...reviewsData].sort((a, b) => new Date(b.date) - new Date(a.date)),
-    []
-  );
-
-  const total = reviews.length;
-  const avg =
-    total === 0 ? 0 : Math.round((reviews.reduce((s, r) => s + (Number(r.rating) || 0), 0) / total) * 10) / 10;
-
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
   const trackRef = useRef(null);
+
+  // Fetch reviews dynamically
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/reviews');
+        if (!res.ok) throw new Error('Failed to fetch reviews');
+
+        const data = await res.json();
+
+        const mapped = (Array.isArray(data) ? data : []).map(item => ({
+          author_name: item.reviewer_name ?? '',
+          text: item.review_text ?? '',
+          date: item.review_date ?? item.created_at,
+          rating: item.rating ?? 0,
+        }));
+
+        if (!cancelled) setReviews(mapped);
+      } catch (err) {
+        console.error('Failed to load reviews:', err);
+        if (!cancelled) setReviews([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+
+    load();
+    return () => (cancelled = true);
+  }, []);
+
+  // Sort newest first
+  const sorted = useMemo(() => {
+    return [...reviews].sort(
+      (a, b) => new Date(b.date || 0) - new Date(a.date || 0)
+    );
+  }, [reviews]);
+
+  const total = sorted.length;
+  const avg = total === 0 ? 0 :
+    Math.round((sorted.reduce((s, r) => s + (Number(r.rating) || 0), 0) / total) * 10) / 10;
 
   const scrollByCards = (dir = 1) => {
     const el = trackRef.current;
     if (!el) return;
+
     const card = el.querySelector('.testimonial-card');
     const gap = 16;
     if (!card) return;
+
     const cardWidth = card.getBoundingClientRect().width + gap;
     el.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
   };
@@ -51,7 +89,7 @@ export default function Testimonials() {
           <button className="nav-btn prev" onClick={() => scrollByCards(-1)}>‹</button>
 
           <div className="track" ref={trackRef}>
-            {reviews.map((r, i) => (
+            {sorted.map((r, i) => (
               <div className="testimonial-card" key={i}>
                 <StarRow rating={r.rating} />
                 <h4>{r.author_name}</h4>
@@ -60,7 +98,8 @@ export default function Testimonials() {
               </div>
             ))}
 
-            {reviews.length === 0 && (
+            {/* Fallback static cards if no reviews */}
+            {sorted.length === 0 && !loading && (
               <>
                 <div className="testimonial-card">
                   <p className="stars">★★★★★</p>

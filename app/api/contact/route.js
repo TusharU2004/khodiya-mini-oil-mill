@@ -29,7 +29,7 @@ export async function POST(req) {
     }
 
     const [result] = await db.query(
-      `INSERT INTO contact_messages (name, email, contact, subject, reason)
+      `INSERT INTO contact_messages (name, email, contact, subject, message_text)
        VALUES (?, ?, ?, ?, ?)`,
       [name, email, contact, subject, reason || null]
     );
