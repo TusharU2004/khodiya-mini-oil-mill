@@ -23,28 +23,28 @@ const processSteps = [
     step: 3,
     title: "Traditional Steam Extraction",
     description: "We apply the required amount of steam to the cleaned seeds. This traditional and gentle method allows the oil to be extracted without high heat or chemicals.",
-    imgSrc: "/process/step3.jpg", // Add your image here
+    imgSrc: "/process/step-3.png", // Add your image here
     imgAlt: "Steam rising from a traditional oil press"
   },
   {
     step: 4,
     title: "Cotton Cloth Filtering",
     description: "The extracted oil undergoes its first filtration through a clean cotton cloth to remove larger particles and solids.",
-    imgSrc: "/process/step4.jpg", // Add your image here
+    imgSrc: "/process/step-4.png", // Add your image here
     imgAlt: "Golden oil being filtered through a white cloth"
   },
   {
     step: 5,
     title: "Final Filtration",
     description: "To ensure maximum purity and a crystal-clear final product, the oil is filtered one last time.",
-    imgSrc: "/process/step5.jpg", // Add your image here
+    imgSrc: "/process/step-5.png", // Add your image here
     imgAlt: "Close-up of clear, pure groundnut oil"
   },
   {
     step: 6,
     title: "Hygienic Packaging",
     description: "Finally, the pure groundnut oil is packed into our 1L bottles, 5L cans, and 15Kg tins, ready for your kitchen.",
-    imgSrc: "/process/step6.jpg", // Add your image here
+    imgSrc: "/process/step-6.png", // Add your image here
     imgAlt: "Final packaged products of Khodiyar Oil Mill"
   },
 ];

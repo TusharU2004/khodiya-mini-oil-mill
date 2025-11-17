@@ -29,7 +29,7 @@ const AboutPage = () => {
               </div>
               <div className="about-image">
                 <Image 
-                  src="/about-us-image.jpg" 
+                  src="/about/about.png" 
                   alt="The facility of Khodiyar Oil Mill" 
                   width={400} 
                   height={500} 
