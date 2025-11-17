@@ -27,14 +27,7 @@ const AboutPage = () => {
                   Our mission is to deliver 100% pure and healthy groundnut oil to every family. We are committed to fair practices, supporting local farmers, and preserving the traditional methods that guarantee the quality of our product.
                 </p>
               </div>
-              <div className="about-image">
-                <Image 
-                  src="/about/about.png" 
-                  alt="The facility of Khodiyar Oil Mill" 
-                  width={400} 
-                  height={500} 
-                />
-              </div>
+              
             </div>
           </div>
         </section>
