@@ -20,7 +20,7 @@ You will also need a MySQL database.
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/khodiya-mini-oil-mill.git
+    git clone https://github.com/TusharU2004/khodiyar-mini-oil-mill
     cd khodiya-mini-oil-mill
     ```
 
