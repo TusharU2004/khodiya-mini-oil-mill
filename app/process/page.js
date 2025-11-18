@@ -53,7 +53,6 @@ const ProcessPage = () => {
   return (
     <>
       <Header />
-      <Hero />
       <main className="process-section">
         <div className="container">
           <p className="subtitle">

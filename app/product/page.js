@@ -8,7 +8,6 @@ const ProductPage = () => {
     <>
       <Header />
       <main>
-        <Hero />
         {/* We can reuse the component you already built for the homepage */}
         <Products />
       </main>
